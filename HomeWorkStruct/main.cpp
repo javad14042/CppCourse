@@ -3,117 +3,150 @@
 
 using namespace std;
 
+class Point {
+private:
+    double x;
+    double y;
+//    double r;
 
-int sides1_2    (int x1,int y1,int x2,int y2,int x3,int y3);
-int sides1_3    (int x1,int y1,int x2,int y2,int x3,int y3);
-int sides3_2    (int x1,int y1,int x2,int y2,int x3,int y3);
+public:
+    double get_x();
+    void set_x(double inX);
 
-int area       (int x1,int y1,int x2,int y2,int x3,int y3);
-int perimeter  (int x1,int y1,int x2,int y2,int x3,int y3);
-int angles     (int x1,int y1,int x2,int y2,int x3,int y3);
+    double distanceFromOtherPoint(Point otherPoint) const;
 
-
-
-
-
-
-struct Triangle
-{
-    int x1;
-    int y1;
-    int x2;
-    int y2;
-    int x3;
-    int y3;
-
-    int sides1_2();
-    int sides1_3 ();
-    int sides3_2();
-    int area();
-    int perimeter();
-    int angles();
-};
-
-
-struct Rectangle
-{
-    int x1;
-    int y1;
-    int x2;
-    int y2;
+    void setPoint(double inX, double inY);
 
 };
 
-struct Exercise3
-{
+struct Triangle {
+
+    Point points[3];
+
+    double *sides();
+
+    double perimeter();
+
+    double area();
+
+    double angles();
+};
+
+struct Rectangle {
+    Point points[2];
+
+    double sideX();
+
+    double sideY();
+
+    double perimeter();
+
+    double area();
+
+};
+
+struct Exercise3 {
     long long id;
     int bet1;
     int bet2;
 
 
-
 };
 
+int main() {
+    Triangle myTriangle{0, 0, 2, 0, 2, 1};
+    double *Asides = myTriangle.sides();
 
-int main()
-{
-    Triangle A{0,0,1,0,1,1};
+    for (int i = 0; i < 3; ++i) {
+        cout << Asides + i << endl;
+        cout << Asides[i] << endl; // *(Asides + i)
+    }
 
-
-    Exercise3 user1;
-    cout<<"Please enter your id : \n";
-    cin>>user1.id;
-    cout<<"You can vote for 2 teams \nplace your bet : \n";
-
-
-
-
-
-
+    delete[] Asides;
+    //angles[0] -> side[0]
+    cout << myTriangle.perimeter() << endl;
+    cout << myTriangle.area() << endl;
 
     return 0;
 }
 
+double Triangle::perimeter() {
+    auto *side = sides();
+    double sumSides = 0;
+    for (int i = 0; i < 3; ++i) {
+        sumSides += side[i];
+    }
+    delete[] side;
+    return sumSides;
+}
 
-int sides1_2(int x1,int y1,int x2,int y2)
-{
-    double p12 = sqrt ( pow((x2-x1),2) + pow((y2-y1),2) );
+double Triangle::area() {
+    double p = perimeter() / 2;
+    auto *side = sides();
+    double a2 = p;
+    for (int i = 0; i < 3; ++i) {
+        a2 *= (p - side[i]);
+    }
+    delete[] side;
+    return sqrt(a2);
+}
+
+//double Triangle::angles() {
+//    double a = sides1_2(x1, y1, x2, y2);
+//    double b = sides1_3(x1, y1, x3, y3);
+//    double c = sides3_2(x2, y2, x3, y3);
+//
+//    double C = acos((pow(a, 2) + pow(b, 2) - pow(c, 2)) / (2 * a * b));
+//    double A = acos((pow(c, 2) + pow(b, 2) - pow(a, 2)) / (2 * c * b));
+//    double B = 180 - (C + A);
+//}
+
+double *Triangle::sides() {
+    auto *tempSides = new double(3);
+//    double tempSides[3];  wrong -> return local variable address
+    for (int i = 0; i < 3; ++i) {
+        if (i != 2)
+            tempSides[i] = points[i].distanceFromOtherPoint(points[i + 1]);
+        else
+            tempSides[i] = points[i].distanceFromOtherPoint(points[0]);
+    }
+    return tempSides;
+}
+
+double Rectangle::area() {
+    return sideX() * sideY();
+}
+
+double Rectangle::sideX() {
+    return abs(points[0].x - points[1].x);
+}
+
+double Rectangle::sideY() {
+    return abs(points[0].y - points[1].y);
+}
+
+double Rectangle::perimeter() {
+    return 2 * (sideY() + sideX());
+}
+
+double Point::distanceFromOtherPoint(Point otherPoint) const {
+    double p12 = sqrt(pow((x - otherPoint.x), 2) + pow((y - otherPoint.y), 2));
     return p12;
 }
 
-int sides1_3(int x1,int y1,int x3,int y3)
-{
-    double p13 = sqrt ( pow((x3-x1),2) + pow((y3-y1),2) );
-    return p13;
+void Point::setPoint(double inX, double inY) {
+    if (inX < 20 && inY < 20) {
+        x = inX;
+        y = inY;
+//        r = sqrt(x * x + y * y);
+    }
 }
 
-int sides3_2(int x2,int y2,int x3,int y3)
-{
-    double p32 = sqrt ( pow((x3-x2),2) + pow((y3-y2),2) );
-    return p32;
+double Point::get_x() {
+    return x;
 }
 
-int perimeter  (int x1,int y1,int x2,int y2,int x3,int y3)
-{
-    return sides3_2( x2, y2, x3, y3) +   sides1_3( x1, y1, x3, y3) +   sides1_2( x1, y1, x2, y2);
+void Point::set_x(double inX) {
+    if(inX < 20)
+        x = inX;
 }
-
-int area(int x1,int y1,int x2,int y2,int x3,int y3)
-{
-    int p =  ( perimeter( x1, y1, x2, y2, x3, y3) )/2;
-    return sqrt( p*(p-sides3_2( x2, y2, x3, y3))*(p-sides1_3( x1, y1, x3, y3) )*(p-sides1_2( x1, y1, x2, y2)));
-}
-
-int angles(int x1,int y1,int x2,int y2,int x3,int y3)
-{
-    double a = sides1_2( x1, y1, x2, y2);
-    double b = sides1_3( x1, y1, x3, y3);
-    double c = sides3_2( x2, y2, x3, y3);
-
-    double C = acos( ( pow(a,2) + pow(b,2) - pow(c,2) )/(2*a*b) );
-    double A = acos( ( pow(c,2) + pow(b,2) - pow(a,2) )/(2*c*b) );
-    double B = 180 - (C + A);
-}
-
-
-
