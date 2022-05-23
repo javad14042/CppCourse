@@ -1,5 +1,9 @@
 #include <iostream>
 #include <math.h>
+#include <vector>
+
+//#define pi 3.14159265359
+double pi = 3.14159265359;
 
 using namespace std;
 
@@ -11,28 +15,32 @@ private:
 
 public:
     double get_x();
-    void set_x(double inX);
+
+    double get_y();
 
     double distanceFromOtherPoint(Point otherPoint) const;
 
+//    void setPoint(double inX1, double inY1,
+//                         double inX2, double inY2,
+//                         double inX3, double inY3);
     void setPoint(double inX, double inY);
-
 };
 
-struct Triangle {
-
+class Triangle {
+public:
     Point points[3];
 
-    double *sides();
+    vector<double> sides();
 
     double perimeter();
 
     double area();
 
-    double angles();
+    vector<double> angles();
 };
 
-struct Rectangle {
+class Rectangle {
+public:
     Point points[2];
 
     double sideX();
@@ -45,7 +53,8 @@ struct Rectangle {
 
 };
 
-struct Exercise3 {
+class Exercise3 {
+public:
     long long id;
     int bet1;
     int bet2;
@@ -54,61 +63,74 @@ struct Exercise3 {
 };
 
 int main() {
-    Triangle myTriangle{0, 0, 2, 0, 2, 1};
-    double *Asides = myTriangle.sides();
+    Triangle myTriangle;
+    myTriangle.points[0].setPoint(2,3);
+    myTriangle.points[1].setPoint(4,7);
+    myTriangle.points[2].setPoint(3,10);
+    auto Asides = myTriangle.sides();
 
     for (int i = 0; i < 3; ++i) {
-        cout << Asides + i << endl;
-        cout << Asides[i] << endl; // *(Asides + i)
+        cout << Asides[i] << endl;
     }
 
-    delete[] Asides;
-    //angles[0] -> side[0]
     cout << myTriangle.perimeter() << endl;
     cout << myTriangle.area() << endl;
 
+    auto angle = myTriangle.angles();
+
+    for (int i = 0; i < 3; ++i) {
+        cout << angle[i] << endl;
+    }
+//    Point A;
+//    A.setPoint(2,3);
+//    Point B;
+//    B.setPoint(5,7);
+//    cout << A.distanceFromOtherPoint(B) << endl;
+//    Point C;
+//    C.setPoint(8,11);
+//    cout << A.distanceFromOtherPoint(C) << endl;
     return 0;
 }
 
 double Triangle::perimeter() {
-    auto *side = sides();
+    auto side = sides();
     double sumSides = 0;
     for (int i = 0; i < 3; ++i) {
         sumSides += side[i];
     }
-    delete[] side;
     return sumSides;
 }
 
 double Triangle::area() {
     double p = perimeter() / 2;
-    auto *side = sides();
+    auto side = sides();
     double a2 = p;
     for (int i = 0; i < 3; ++i) {
         a2 *= (p - side[i]);
     }
-    delete[] side;
     return sqrt(a2);
 }
 
-//double Triangle::angles() {
-//    double a = sides1_2(x1, y1, x2, y2);
-//    double b = sides1_3(x1, y1, x3, y3);
-//    double c = sides3_2(x2, y2, x3, y3);
-//
-//    double C = acos((pow(a, 2) + pow(b, 2) - pow(c, 2)) / (2 * a * b));
-//    double A = acos((pow(c, 2) + pow(b, 2) - pow(a, 2)) / (2 * c * b));
-//    double B = 180 - (C + A);
-//}
+vector<double> Triangle::angles() {
+    auto side = sides();
+    auto a = side[0];
+    auto b = side[1];
+    auto c = side[2];
+    vector<double> angle;
+    angle.emplace_back(180/pi*acos((pow(a, 2) + pow(b, 2) - pow(c, 2)) / (2 * a * b)));
+    angle.emplace_back(180/pi*acos((pow(c, 2) + pow(b, 2) - pow(a, 2)) / (2 * c * b)));
+    angle.emplace_back(180 - (angle[0] + angle[1]));
+    return angle;
+}
 
-double *Triangle::sides() {
-    auto *tempSides = new double(3);
+vector<double> Triangle::sides() {
+    vector<double> tempSides;
 //    double tempSides[3];  wrong -> return local variable address
     for (int i = 0; i < 3; ++i) {
-        if (i != 2)
-            tempSides[i] = points[i].distanceFromOtherPoint(points[i + 1]);
-        else
-            tempSides[i] = points[i].distanceFromOtherPoint(points[0]);
+        if (i != 2) // 0->1 , 1->2
+            tempSides.emplace_back(points[i].distanceFromOtherPoint(points[i + 1]));
+        else // 2->0
+            tempSides.emplace_back(points[i].distanceFromOtherPoint(points[0]));
     }
     return tempSides;
 }
@@ -118,35 +140,36 @@ double Rectangle::area() {
 }
 
 double Rectangle::sideX() {
-    return abs(points[0].x - points[1].x);
+    return abs(points[0].get_x() - points[1].get_x());
 }
 
 double Rectangle::sideY() {
-    return abs(points[0].y - points[1].y);
+    return abs(points[0].get_y() - points[1].get_y());
 }
 
 double Rectangle::perimeter() {
     return 2 * (sideY() + sideX());
 }
 
+
 double Point::distanceFromOtherPoint(Point otherPoint) const {
     double p12 = sqrt(pow((x - otherPoint.x), 2) + pow((y - otherPoint.y), 2));
     return p12;
-}
-
-void Point::setPoint(double inX, double inY) {
-    if (inX < 20 && inY < 20) {
-        x = inX;
-        y = inY;
-//        r = sqrt(x * x + y * y);
-    }
 }
 
 double Point::get_x() {
     return x;
 }
 
-void Point::set_x(double inX) {
-    if(inX < 20)
-        x = inX;
+double Point::get_y() {
+    return y;
+
 }
+
+void Point::setPoint(double inX, double inY) {
+    x = inX;
+    y = inY;
+}
+
+
+
