@@ -5,15 +5,26 @@
 
 using namespace std;
 
+enum class printFlag{
+    no,
+    yes,
+};
+
 class account
 {
 private:
     long int balance=0;
     string name;
     long int id;
-    long int phone_number;
+    const long int phone_number;
 public:
-    void deposit(int x);
+    //1- > write no constructor -> c++ generate default constructor (no args constructor)
+    //2- > write any constructor -> c++ no longer create default constructor
+//    account();
+//    explicit account(string InName);
+    explicit account(string InName = "",long int Inid = 0,long int Inphone_number = 0,long int Inbalance = 0); //constructor
+
+    void deposit(int x, printFlag flag = printFlag::yes);
     void DispalyBalance();
     void withdraw(int y);
 
@@ -22,14 +33,6 @@ public:
     long int getNumber();
     long int getId();
 
-    account(string InName,long int Inid,long int Inphone_number,long int Inbalance) //constructor
-    {
-        name=InName;
-        id=Inid;
-        phone_number=Inphone_number;
-        balance=Inbalance;
-
-    }
 };
 
 
