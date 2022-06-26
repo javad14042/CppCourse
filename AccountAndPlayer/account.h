@@ -1,40 +1,38 @@
-#pragma once
-
+#ifndef ACCOUNT_H_INCLUDED
+#define ACCOUNT_H_INCLUDED
 #include <iostream>
-#include <vector>
 
-enum class transactionEnum{
-    all,
-    withdraw,
-    deposit,
-};
 
-using std::string;
-using std::vector;
+using namespace std;
 
 class account
 {
-
-
 private:
-    long int balance;
+    long int balance=0;
     string name;
-
-public:
-    vector<int> depositList;
-    vector<int> withdrawList;
-    int id;
+    long int id;
     long int phone_number;
-
-    account(string inName);
-    account(string inName,int inId, long int inPhone);
-    void setName(string inName);
-    void displayName();
+public:
     void deposit(int x);
-    int DispalyBalance();
+    void DispalyBalance();
     void withdraw(int y);
 
-    void printTransaction(transactionEnum transaction);
+    long int getBalance();
+    string getName();
+    long int getNumber();
+    long int getId();
 
+    account(string InName,long int Inid,long int Inphone_number,long int Inbalance) //constructor
+    {
+        name=InName;
+        id=Inid;
+        phone_number=Inphone_number;
+        balance=Inbalance;
+
+    }
 };
 
+
+
+
+#endif // ACCOUNT_H_INCLUDED
