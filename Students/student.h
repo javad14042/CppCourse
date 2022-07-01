@@ -14,14 +14,11 @@ public:
     double chemistry;
     double average;
 
-    void calculateAverage(){
-        double sum = 0;
-        sum += math;
-        sum += physics;
-        sum += chemistry;
 
-        average = sum/3;
-    }
+   explicit student(string InName="",double InMath=0,double InPhysics=0,double InChemistry=0);
+
+    double calculateAverage();
+
 };
 
 
