@@ -16,7 +16,6 @@ public:
     float location;
 
     vector<student> students;
-    student namayende;
 public:
     void printStudents();
 

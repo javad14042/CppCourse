@@ -16,6 +16,17 @@ public:
 
 
    explicit student(string InName="",double InMath=0,double InPhysics=0,double InChemistry=0);
+    //implement 5 methods
+    //student()
+    //student(string name);
+    //student(string name, double InMath);
+    //student(string name, double InMath, double In3);
+    //student(string name, double InMath, double In3, double in4);
+
+    //not implement following method
+    explicit student(double InMath, double InPhysics=0, double InChemistry=0);
+
+    ~student();
 
     double calculateAverage();
 
