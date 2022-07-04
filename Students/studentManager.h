@@ -2,22 +2,31 @@
 #define D2_STUDENTMANAGER_H
 
 #include <iostream>
+#include <fstream>
 #include <string>
 #include "student.h"
 
 using namespace std;
 
+enum class subjects
+{
+    math,
+    physics,
+    chemistry,
+
+};
+
 class studentManager
 {
 public:
-    int id;
-    vector<int> ids;
-    int rank;
-    float location;
-
+    string FileAddress;
     vector<student> students;
-public:
+
     void printStudents();
+    void ReadFile();
+    explicit studentManager(string FileAddress="");
+    void ChangeScores(string InName,subjects,double NewScore);
+    int ReturnIndex(string InName);
 
 };
 
