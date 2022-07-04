@@ -14,8 +14,13 @@ public:
     double chemistry;
     double average;
 
+    int *totalAverage;
 
+    static int count;
    explicit student(string InName="",double InMath=0,double InPhysics=0,double InChemistry=0);
+   // create an object from source object
+   //student(const student &source) = delete;
+   student(const student &source);
     //implement 5 methods
     //student()
     //student(string name);

@@ -13,7 +13,6 @@ enum class subjects
     math,
     physics,
     chemistry,
-
 };
 
 class studentManager
@@ -27,7 +26,6 @@ public:
     explicit studentManager(string FileAddress="");
     void ChangeScores(string InName,subjects,double NewScore);
     int ReturnIndex(string InName);
-
 };
 
 
