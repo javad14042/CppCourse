@@ -21,6 +21,7 @@ public:
    // create an object from source object
    //student(const student &source) = delete;
    student(const student &source);
+   student(student &&source);
     //implement 5 methods
     //student()
     //student(string name);
