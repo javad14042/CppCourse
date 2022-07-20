@@ -2,10 +2,10 @@
 #define ACCOUNT_H_INCLUDED
 #include <iostream>
 
-
 using namespace std;
 
-enum class printFlag{
+enum class printFlag
+{
     no,
     yes,
 };
@@ -17,25 +17,28 @@ private:
     string name;
     long int id;
     const long int phone_number;
+    string username=" ";
+    string password;
 public:
-    //1- > write no constructor -> c++ generate default constructor (no args constructor)
-    //2- > write any constructor -> c++ no longer create default constructor
-//    account();
-//    explicit account(string InName);
-    explicit account(string InName = "",long int Inid = 0,long int Inphone_number = 0,long int Inbalance = 0); //constructor
-
+    //constructor
+    explicit account(string InName = "",long int Inphone_number = 0);
+    //functions
     void deposit(int x, printFlag flag = printFlag::yes);
-    void DispalyBalance();
+    void DisplayBalance();
     void withdraw(int y);
-
+    //getters an setters
+    void setBalance(long int InBalance);
     long int getBalance();
     string getName();
+    void setName(string InName);
     long int getNumber();
-    long int getId();
+    int getId();
+    int setId(int InId);
+    string getUsername();
+    void setUsername(string InUsername);
+    string getPass();
+    void setPass(string InPass);
 
 };
-
-
-
 
 #endif // ACCOUNT_H_INCLUDED

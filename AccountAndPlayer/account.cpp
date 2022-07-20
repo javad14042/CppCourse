@@ -9,41 +9,78 @@ using std::string;
 //account::account(string InName) : account(InName,0,0,0) {
 //}
 
-account::account(string InName, long int Inid, long int Inphone_number, long int Inbalance)  //constructor
-: name{InName}, id{Inid}, phone_number{Inphone_number}, balance{Inbalance} {
-    cout << "a new account was generated" << endl;
+int p=1;
+account::account(string InName, long int Inphone_number)
+: name{InName},phone_number{Inphone_number}
+{
+    p++;
+    id=setId(p);
 }
 
-void account::deposit(int x, printFlag flag) {
+void account::deposit(int x, printFlag flag)
+{
     balance += x;
     if (flag == printFlag::yes)
-        account::DispalyBalance();
+        account::DisplayBalance();
 }
 
-void account::withdraw(int y) {
+void account::withdraw(int y)
+{
     balance -= y;
-    account::DispalyBalance();
 }
 
-void account::DispalyBalance() {
+void account::DisplayBalance()
+{
     cout << "Balance : " << balance << endl;
 }
 
-long int account::getBalance() {
+long int account::getBalance()
+{
     return balance;
 }
 
-string account::getName() {
+string account::getName()
+{
     return name;
 }
 
+void account::setName(string InName)
+{
+    name=InName;
+}
 
-long int account::getNumber() {
+long int account::getNumber()
+{
     return phone_number;
 }
 
-long int account::getId() {
+int account::getId()
+{
     return id;
 }
 
+int account::setId(int InId)
+{
+    id=InId;
+    return InId;
+}
+string account::getUsername()
+{
+    return username;
+}
+void account::setUsername(string InUsername)
+{
+    username=InUsername;
+}
+string account::getPass()
+{
+    return password;
+}
+void account::setPass(string InPass)
+{
+    password=InPass;
+}
 
+void account::setBalance(long int InBalance) {
+    balance=InBalance;
+}
