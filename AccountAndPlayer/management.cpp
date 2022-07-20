@@ -64,31 +64,16 @@ bool management::loginCheck(string user, string pass) {
     cout << "Incorrect username or password\n";
 }
 
-void management::SignUpCheck(string user) {
-    bool flag = true;
+bool management::SignUpCheck(string user) {
     for (int i = 0; i < customers.size(); ++i) {
         if (customers[i].getUsername() == user)
-            flag = false;
+            return false;
     }
-
-    if (flag)
-        customers[customers.size()].setUsername(user);
-    else {
-        cout << "Username already taken\n";
-        cout << "Enter another username\n";
-        cin >> user;
-        SignUpCheck(user);
-    }
+    return true;
 }
 
-void management::PassCheck(string pass) {
-    if (pass.length() < 6) {
-        cout << "Your password is too short\n";
-        cout << "Enter another password\n";
-        cin >> pass;
-        PassCheck(pass);
-    } else
-        customers[customers.size()].setPass(pass);
+bool management::PassCheck(string pass) {
+    return (pass.length() >= 6);
 }
 
 int management::returnIndex(string username) {
@@ -110,7 +95,7 @@ void management::DisplayBalance(int index) {
 }
 
 void management::readFile() {
-    ifstream file1("filename.txt");
+    ifstream file1("build\\filename.txt");
     string name;
     string username;
     string pass;

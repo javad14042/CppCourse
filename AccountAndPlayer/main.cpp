@@ -23,19 +23,22 @@ branch1.ListOfAccounts();*/
     reza.setPass("321");
     reza.setName("reza");
     branch1.addToVector(reza);
+    string sop;
     char op;
     string InUsername;
     string InPass;
 
     while (1) {
         cout << "enter l for login or s for sign up e for exit\n";
-        cin >> op;
+        cin >> sop;
+        op = sop[0];
         if (op == 'l' || op == 'L') {
             cout << "enter your username :\n";
             cin >> InUsername;
             cout << "enter your password :\n";
             cin >> InPass;
             if (branch1.loginCheck(InUsername, InPass)) {
+                int index = branch1.returnIndex(InUsername);
                 while (1) {
                     cout << "Enter d for deposit w for withdraw b for displaying balance e for exit\n";
                     cin >> op;
@@ -43,14 +46,14 @@ branch1.ListOfAccounts();*/
                         cout << "How much do you want to deposit?\n";
                         int input;
                         cin >> input;
-                        branch1.deposit(input, branch1.returnIndex(InUsername));
+                        branch1.deposit(input, index);
                     } else if (op == 'w' || op == 'W') {
                         cout << "How much do you want to withdraw?\n";
                         int input;
                         cin >> input;
-                        branch1.withdraw(input, branch1.returnIndex(InUsername));
+                        branch1.withdraw(input, index);
                     } else if (op == 'b' || op == 'B')
-                        branch1.DisplayBalance(branch1.returnIndex(InUsername));
+                        branch1.DisplayBalance(index);
                     else if (op == 'e' || op == 'E')
                         break;
                     else
@@ -67,15 +70,24 @@ branch1.ListOfAccounts();*/
             cin >> PhoneNumber;
             cout << "enter your username :\n";
             cin >> InUsername;
-            branch1.SignUpCheck(InUsername);
+            while (!branch1.SignUpCheck(InUsername)) {
+                cout << "Username already taken\n";
+                cout << "Enter another username\n";
+                cin >> InUsername;
+            }
             cout << "enter your password :\n";
             cin >> InPass;
-            branch1.PassCheck(InPass);
+            while (!management::PassCheck(InPass)) {
+                cout << "Your password is too short\n";
+                cout << "Enter another password\n";
+                cin >> InPass;
+            }
             account tmp(InName, PhoneNumber);
             tmp.setUsername(InUsername);
             tmp.setPass(InPass);
             branch1.addToVector(tmp);
-            cout << branch1.returnIndex("asghar");
+            cout << "Your account is registered successfully" << endl;
+            cout << "You can login to your account" << endl;
         } else if (op == 'e' || op == 'E')
             break;
         else

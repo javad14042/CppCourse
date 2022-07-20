@@ -27,8 +27,8 @@ public:
     void addToVector(account tmp);
     void SetVector(account tmp);
     bool loginCheck(string user,string pass);
-    void SignUpCheck(string user);
-    void PassCheck(string pass);
+    bool SignUpCheck(string user);
+    static bool PassCheck(string pass);
 };
 
 #endif // MANAGEMENT_H
