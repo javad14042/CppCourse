@@ -20,7 +20,7 @@ public:
     void DisplayBalance(int index);
     void search_name(string);
     void search_id( int id);
-    void readFile();
+    void readFile(string fileName);
 
     int returnIndexById(int id);
     void deposit(int id, long amount);
@@ -29,6 +29,7 @@ public:
     bool loginCheck(string user,string pass);
     bool SignUpCheck(string user);
     static bool PassCheck(string pass);
+    account *searchUsername(string username);
 };
 
 #endif // MANAGEMENT_H

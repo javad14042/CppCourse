@@ -94,8 +94,9 @@ void management::DisplayBalance(int index) {
     customers[index].DisplayBalance();
 }
 
-void management::readFile() {
-    ifstream file1("build\\filename.txt");
+void management::readFile(string fileName) {
+    ifstream file1;
+    file1.open(fileName);
     string name;
     string username;
     string pass;
@@ -109,5 +110,11 @@ void management::readFile() {
         customers.emplace_back(tmp);
     }
     file1.close();
+}
+
+account *management::searchUsername(string username) {
+    for (int i = 0; i < customers.size(); ++i)
+        if (customers[i].getUsername() == username)
+            return &customers[i];
 }
 

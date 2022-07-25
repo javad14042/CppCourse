@@ -1,21 +1,22 @@
 #include <iostream>
-#include <vector>
 #include "account.h"
 #include "management.h"
+#include "taxi.h"
+#include "food.h"
 
 using namespace std;
+void customersDashboard();
 
 int main() {
 
-
     management branch1;
-/*branch1.readFile();
-branch1.ListOfAccounts();*/
+ //s   branch1.readFile( "D:\\Programming\\CodeBlocks\\project\\filename.txt");
 
     account amir;
     amir.setUsername("amir");
     amir.setPass("123");
     amir.setName("amir");
+    amir.setBalance(250);
     branch1.addToVector(amir);
 
     account reza;
@@ -28,8 +29,8 @@ branch1.ListOfAccounts();*/
     string InUsername;
     string InPass;
 
-    while (1) {
-        cout << "enter l for login or s for sign up e for exit\n";
+    while (true) {
+        cout << "Enter l for login or s for sign up e for exit\n";
         cin >> sop;
         op = sop[0];
         if (op == 'l' || op == 'L') {
@@ -39,8 +40,8 @@ branch1.ListOfAccounts();*/
             cin >> InPass;
             if (branch1.loginCheck(InUsername, InPass)) {
                 int index = branch1.returnIndex(InUsername);
-                while (1) {
-                    cout << "Enter d for deposit w for withdraw b for displaying balance e for exit\n";
+                while (true) {
+                    customersDashboard();
                     cin >> op;
                     if (op == 'd' || op == 'D') {
                         cout << "How much do you want to deposit?\n";
@@ -52,7 +53,18 @@ branch1.ListOfAccounts();*/
                         int input;
                         cin >> input;
                         branch1.withdraw(input, index);
-                    } else if (op == 'b' || op == 'B')
+                    }
+                    else if(op=='t' || op=='T')
+                    {
+                        taxi tmp(amir);
+                        tmp.order();
+                    }
+                    else if(op=='f' || op=='F')
+                    {
+                        food tmp(amir);
+                        tmp.order();
+                    }
+                    else if (op == 'b' || op == 'B')
                         branch1.DisplayBalance(index);
                     else if (op == 'e' || op == 'E')
                         break;
@@ -96,6 +108,18 @@ branch1.ListOfAccounts();*/
 
     return 0;
 }
+void customersDashboard()
+{
+    cout << "Enter d for deposit\n"
+            "      w for withdraw\n"
+            "      b for displaying balance\n"
+            "      t for taxi\n"
+            "      f for food\n"
+            "      e for exit\n";
+}
+
+
+
 
 
 
