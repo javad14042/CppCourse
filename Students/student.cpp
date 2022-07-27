@@ -52,6 +52,14 @@ double student::calculateAverage()
     return average;
 }
 
+void student::printScores() const{
+    cout << name << " : ";
+    cout << math << " , ";
+    cout << physics << " , ";
+    cout << chemistry << " , ";
+    cout << average << endl;
+}
+
 student::~student() {
     count--;
     cout << "destructor calls : " << this << " count of objects : " << count << " p: "<< totalAverage << endl;

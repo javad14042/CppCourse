@@ -35,7 +35,7 @@ public:
     ~student();
 
     double calculateAverage();
-
+    void printScores() const;
 };
 
 
