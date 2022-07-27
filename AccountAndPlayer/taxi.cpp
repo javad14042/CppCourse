@@ -1,7 +1,7 @@
 #include "taxi.h"
 
-taxi::taxi(account &obj)
-: name{&obj} {
+taxi::taxi(account *obj)
+: name{obj} {
 }
 
 void taxi::order() {

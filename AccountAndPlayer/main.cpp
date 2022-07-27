@@ -5,13 +5,16 @@
 #include "food.h"
 
 using namespace std;
+
 void customersDashboard();
 
 int main() {
 
     management branch1;
- //s   branch1.readFile( "D:\\Programming\\CodeBlocks\\project\\filename.txt");
-
+    //s   branch1.readFile( "D:\\Programming\\CodeBlocks\\project\\filename.txt");
+    account *myAccount = nullptr;
+    taxi *myTaxi = nullptr;
+    taxi *myFood = nullptr;
     account amir;
     amir.setUsername("amir");
     amir.setPass("123");
@@ -28,7 +31,6 @@ int main() {
     char op;
     string InUsername;
     string InPass;
-
     while (true) {
         cout << "Enter l for login or s for sign up e for exit\n";
         cin >> sop;
@@ -40,6 +42,7 @@ int main() {
             cin >> InPass;
             if (branch1.loginCheck(InUsername, InPass)) {
                 int index = branch1.returnIndex(InUsername);
+                if(index == -1) break;
                 while (true) {
                     customersDashboard();
                     cin >> op;
@@ -53,21 +56,37 @@ int main() {
                         int input;
                         cin >> input;
                         branch1.withdraw(input, index);
-                    }
-                    else if(op=='t' || op=='T')
-                    {
-                        taxi tmp(amir);
-                        tmp.order();
-                    }
-                    else if(op=='f' || op=='F')
-                    {
-                        food tmp(amir);
-                        tmp.order();
-                    }
-                    else if (op == 'b' || op == 'B')
+                    } else if (op == 't' || op == 'T') {
+                        if(myTaxi == nullptr){
+                            if(myAccount == nullptr){
+                                myAccount = branch1.searchUsername(InUsername);
+                                myTaxi = new taxi(myAccount);
+                            } else{
+                                myTaxi = new taxi(myAccount);
+                            }
+                        }
+                        myTaxi->order();
+                    } else if (op == 'f' || op == 'F') {
+                        if(myFood == nullptr){
+                            if(myAccount == nullptr){
+                                myAccount = branch1.searchUsername(InUsername);
+                                myFood = new taxi(myAccount);
+                            } else{
+                                myFood = new taxi(myAccount);
+                            }
+                        }
+                        myFood->order();
+                    } else if (op == 'b' || op == 'B')
                         branch1.DisplayBalance(index);
-                    else if (op == 'e' || op == 'E')
+                    else if (op == 'e' || op == 'E'){
+                        delete myTaxi;
+                        delete myFood;
+                        delete myAccount;
+                        myAccount = nullptr;
+                        myTaxi = nullptr;
+                        myFood = nullptr;
                         break;
+                    }
                     else
                         cout << "Wrong Input\n";
                 }
@@ -108,8 +127,8 @@ int main() {
 
     return 0;
 }
-void customersDashboard()
-{
+
+void customersDashboard() {
     cout << "Enter d for deposit\n"
             "      w for withdraw\n"
             "      b for displaying balance\n"

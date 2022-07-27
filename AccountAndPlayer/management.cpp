@@ -52,7 +52,6 @@ void management::SetVector(account tmp) {
 }
 
 bool management::loginCheck(string user, string pass) {
-
     for (int i = 0; i < customers.size(); ++i) {
         if (customers[i].getUsername() == user) {
             if (customers[i].getPass() == pass) {
@@ -62,6 +61,7 @@ bool management::loginCheck(string user, string pass) {
         }
     }
     cout << "Incorrect username or password\n";
+    return false;
 }
 
 bool management::SignUpCheck(string user) {
@@ -80,6 +80,7 @@ int management::returnIndex(string username) {
     for (int i = 0; i < customers.size(); i++)
         if (customers[i].getUsername() == username)
             return i;
+    return -1;
 }
 
 void management::deposit(int x, int index) {
@@ -116,5 +117,6 @@ account *management::searchUsername(string username) {
     for (int i = 0; i < customers.size(); ++i)
         if (customers[i].getUsername() == username)
             return &customers[i];
+    return nullptr;
 }
 

@@ -6,7 +6,7 @@ class food {
 public:
     account *name;
 
-    explicit food(account &obj);
+    explicit food(account *obj);
 
     void order();
 };

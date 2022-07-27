@@ -6,7 +6,7 @@ class taxi {
 public:
     account *name;
 
-    explicit taxi(account &obj);
+    explicit taxi(account *obj);
 
     void order();
 };
