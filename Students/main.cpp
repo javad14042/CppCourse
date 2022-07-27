@@ -34,6 +34,10 @@ student createstudent(student &input){
     return input; // return an object
 }
 
+void printStudent(const student input){
+    input.printScores();
+}
+
 int main() {
 
 /*    vector<int> vec1;
@@ -61,7 +65,7 @@ int main() {
     cout << "after" << endl;
     cout << obj1.b[0] << endl;
     cout << obj2.b[0] << endl;*/
-    // copy constructor
+/*    // copy constructor
     // pass by value
     // return a non-temporary object
     // construct one object base on another object
@@ -104,12 +108,12 @@ int main() {
 
 //    class1.ChangeScores("amir",subjects::physics,0);
 //
- /*   class1.printStudents();
+    class1.printStudents();
     class1.students.at(2).totalAverage[0] = 11;
     cout << endl;
     class1.printStudents();
 
-*/
+
 
 
 // //lvalue -> addressable
@@ -120,6 +124,16 @@ int main() {
 // //rvalue -> not addressable
 // int &&b = 300;
 
+*/
+
+    student NonConstStudent("Javad",10,16,14);
+    NonConstStudent.calculateAverage();
+    NonConstStudent.printScores();
+
+    const student constStudent("Amir",19,20,16);
+    constStudent.printScores();
+
+    const double pi{3.14};
 
     return 0;
 }
