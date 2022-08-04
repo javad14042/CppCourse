@@ -1,6 +1,8 @@
 #ifndef ACCOUNT_H_INCLUDED
 #define ACCOUNT_H_INCLUDED
 #include <iostream>
+#include <vector>
+#include "movie.h"
 
 using namespace std;
 
@@ -38,7 +40,6 @@ public:
     void setUsername(string InUsername);
     string getPass();
     void setPass(string InPass);
-
 };
 
 #endif // ACCOUNT_H_INCLUDED

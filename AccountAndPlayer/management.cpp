@@ -1,8 +1,10 @@
 #include <iostream>
 #include <vector>
-#include <string.h>
 #include "account.h"
 #include "management.h"
+#include "taxi.h"
+#include "food.h"
+#include "onlineTv.h"
 
 void management::ListOfAccounts() {
     for (int i = 0; i < customers.size(); i++) {
@@ -118,5 +120,127 @@ account *management::searchUsername(string username) {
         if (customers[i].getUsername() == username)
             return &customers[i];
     return nullptr;
+}
+
+void management::LoginManager() {
+    account *myAccount = nullptr;
+    taxi *myTaxi = nullptr;
+    food *myFood = nullptr;
+    onlineTv *myMovie = nullptr;
+
+    movies tmp2;
+    tmp2.readFile("D:\\Programming\\CodeBlocks\\project\\filename.txt");
+
+    string InUsername;
+    string InPass;
+    cout << "enter your username :\n";
+    cin >> InUsername;
+    cout << "enter your password :\n";
+    cin >> InPass;
+    if (this->loginCheck(InUsername, InPass)) {
+        int index = this->returnIndex(InUsername);
+        while (true) {
+            customersDashboard();
+            string sop;
+            cin >> sop[0];
+            if (sop[0] == 'd' || sop[0] == 'D') {
+                cout << "How much do you want to deposit?\n";
+                int input;
+                cin >> input;
+                this->deposit(input, index);
+            } else if (sop[0] == 'w' || sop[0] == 'W') {
+                cout << "How much do you want to withdraw?\n";
+                int input;
+                cin >> input;
+                this->withdraw(input, index);
+            } else if (sop[0] == 't' || sop[0] == 'T') {
+                if (myTaxi == nullptr) {
+                    if (myAccount == nullptr) {
+                        myAccount = this->searchUsername(InUsername);
+                        myTaxi = new taxi(myAccount);
+                    } else {
+                        myTaxi = new taxi(myAccount);
+                    }
+                }
+                myTaxi->order();
+            } else if (sop[0] == 'f' || sop[0] == 'F') {
+                if (myFood == nullptr) {
+                    if (myAccount == nullptr) {
+                        myAccount = this->searchUsername(InUsername);
+                        myFood = new food(myAccount);
+                    } else {
+                        myFood = new food(myAccount);
+                    }
+                }
+                myFood->order();
+            } else if (sop[0] == 'm' || sop[0] == 'M') {
+                if (myMovie == nullptr) {
+                    if (myAccount == nullptr) {
+                        myAccount = this->searchUsername(InUsername);
+                        myMovie = new onlineTv(myAccount);
+                    } else {
+                        myMovie = new onlineTv(myAccount);
+                    }
+                }
+                tmp2.displayMovies();
+                myMovie->order(tmp2);
+
+            } else if (sop[0] == 'b' || sop[0] == 'B')
+                DisplayBalance(index);
+            else if (sop[0] == 'e' || sop[0] == 'E') {
+                delete myTaxi;
+                delete myFood;
+                delete myAccount;
+                myAccount = nullptr;
+                myTaxi = nullptr;
+                myFood = nullptr;
+                myMovie = nullptr;
+                return;
+            } else
+                cout << "Wrong Input\n";
+        }
+    }
+}
+
+void management::SignUpManager() {
+    string InPass;
+    string InUsername;
+    string InName;
+    long int PhoneNumber;
+    cout << "Please enter your name\n";
+    cin >> InName;
+    cout << "Please enter your phone number\n";
+    cin >> PhoneNumber;
+    cout << "enter your username :\n";
+    cin >> InUsername;
+    while (!this->SignUpCheck(InUsername)) {
+        cout << "Username already taken\n";
+        cout << "Enter another username\n";
+        cin >> InUsername;
+    }
+    cout << "enter your password :\n";
+    cin >> InPass;
+    while (!management::PassCheck(InPass)) {
+        cout << "Your password is too short\n";
+        cout << "Enter another password\n";
+        cin >> InPass;
+    }
+    account tmp(InName, PhoneNumber);
+    tmp.setUsername(InUsername);
+    tmp.setPass(InPass);
+    this->addToVector(tmp);
+    cout << "Your account is registered successfully" << endl;
+    cout << "You can login into your account" << endl;
+
+}
+
+void management::customersDashboard() {
+    cout << "Enter d for deposit\n"
+            "      w for withdraw\n"
+            "      b for displaying balance\n"
+            "      t for taxi\n"
+            "      f for food\n"
+            "      m for movie\n"
+            "      e for exit\n";
 }
 

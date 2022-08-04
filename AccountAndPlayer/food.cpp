@@ -1,7 +1,7 @@
 #include "food.h"
 
 food::food(account *obj)
-: name{obj} {
+        : name{obj} {
 }
 
 void food::order() {

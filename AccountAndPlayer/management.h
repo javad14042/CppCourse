@@ -21,7 +21,6 @@ public:
     void search_name(string);
     void search_id( int id);
     void readFile(string fileName);
-
     int returnIndexById(int id);
     void deposit(int id, long amount);
     void addToVector(account tmp);
@@ -30,6 +29,10 @@ public:
     bool SignUpCheck(string user);
     static bool PassCheck(string pass);
     account *searchUsername(string username);
+    void LoginManager();
+    void SignUpManager();
+    static void customersDashboard();
+
 };
 
 #endif // MANAGEMENT_H
