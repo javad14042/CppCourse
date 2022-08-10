@@ -12,13 +12,12 @@ private:
     vector<movie>movieList;
 public:
     void displayMovies();
-    void SetVector(movie tmp);
-    void Search(string parameter,flag flag1);
+    void addMovie(movie tmp);
+    void Search(const string &parameter,flag flag1);
     bool SearchName(string InName);
     bool SearchId(int id) ;
     void readFile(string fileAddress);
     int returnSizeOfVector();
-
 };
 
 

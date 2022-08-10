@@ -1,4 +1,8 @@
 #include "account.h"
+#include "movie.h"
+#include "food.h"
+#include "taxi.h"
+#include "onlineTv.h"
 
 using namespace std;
 using std::string;
@@ -9,12 +13,18 @@ using std::string;
 //account::account(string InName) : account(InName,0,0,0) {
 //}
 
-int p = 1;
+int account::idCounter = 1;
 
 account::account(string InName, long int Inphone_number)
-        : name{InName}, phone_number{Inphone_number} {
-    p++;
-    id = setId(p);
+: name{InName}, phone_number{Inphone_number} {
+    id = setId(idCounter);
+    idCounter++;
+}
+
+account::~account() {
+    delete myMovie;
+    delete myFood;
+    delete myTaxi;
 }
 
 void account::deposit(int x, printFlag flag) {
@@ -74,4 +84,19 @@ void account::setPass(string InPass) {
 
 void account::setBalance(long int InBalance) {
     balance = InBalance;
+}
+
+void account::foodCheck() {
+    if (myFood == nullptr)
+        myFood = new food(this);
+}
+
+void account::movieCheck() {
+    if (myMovie == nullptr)
+        myMovie = new onlineTv(this);
+}
+
+void account::taxiCheck() {
+    if (myTaxi == nullptr)
+        myTaxi = new taxi(this);
 }

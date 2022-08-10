@@ -19,7 +19,7 @@ void onlineTv::order(movies sample) {
         if (!search(id))
             cout << "You have bought this film before\n";
         else if (!searchExistence(id, sample))
-            cout << "Wrong Input\n";
+            cout << "Your input is out of range\n";
     }
 }
 

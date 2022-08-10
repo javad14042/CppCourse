@@ -1,13 +1,14 @@
 #include "movie.h"
 
-movie::movie(string InName, string InGenre, string InLimit,int InId)
-:name{InName},genre{InGenre},ageLimit{InLimit},id{InId}
-{
+int movie::idCounter = 1;
 
+movie::movie(string InName, string InGenre, string InLimit)
+: name{InName}, genre{InGenre}, ageLimit{InLimit} {
+    id = idCounter;
+    idCounter++;
 }
 
 movie::movie(int InId)
-:id{InId}
-{
+        : id{InId} {
 
 }

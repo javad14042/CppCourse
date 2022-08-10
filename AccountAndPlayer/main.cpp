@@ -14,6 +14,14 @@ int main() {
     amir.setName("amir");
     amir.setBalance(1000);
     branch1.addToVector(amir);
+
+    account reza;
+    reza.setUsername("reza");
+    reza.setPass("123");
+    reza.setName("reza");
+    reza.setBalance(1000);
+    branch1.addToVector(reza);
+
     string sop;
 
 
@@ -30,10 +38,6 @@ int main() {
         } else
             cout << "Wrong Input\n";
     }
-
-
-
-
 
     return 0;
 }

@@ -2,8 +2,11 @@
 #define ACCOUNT_H_INCLUDED
 #include <iostream>
 #include <vector>
-#include "movie.h"
 
+
+class food;
+class taxi;
+class onlineTv;
 using namespace std;
 
 enum class printFlag
@@ -15,15 +18,25 @@ enum class printFlag
 class account
 {
 private:
-    long int balance=0;
+    long int balance = 0;
     string name;
     long int id;
     const long int phone_number;
     string username=" ";
     string password;
+
+
+
+
+    static int idCounter;
+
 public:
-    //constructor
+    food *myFood = nullptr;
+    taxi *myTaxi = nullptr;
+    onlineTv *myMovie = nullptr;
+    //constructor and destructor
     explicit account(string InName = "",long int Inphone_number = 0);
+    ~account();
     //functions
     void deposit(int x, printFlag flag = printFlag::yes);
     void DisplayBalance();
@@ -40,6 +53,12 @@ public:
     void setUsername(string InUsername);
     string getPass();
     void setPass(string InPass);
+
+    void foodCheck();
+    void movieCheck();
+    void taxiCheck();
+
+
 };
 
 #endif // ACCOUNT_H_INCLUDED

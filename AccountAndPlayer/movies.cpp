@@ -1,11 +1,11 @@
 #include <fstream>
 #include "movies.h"
 
-void movies::SetVector(movie tmp) {
+void movies::addMovie(movie tmp) {
     movieList.emplace_back(tmp);
 }
 
-void movies::Search(string parameter, flag flag1) {
+void movies::Search(const string &parameter, flag flag1) {
     if (flag1 == flag::ageLimit) {
         for (int i = 0; i < movieList.size(); ++i)
             if (movieList[i].ageLimit == parameter)
@@ -33,33 +33,34 @@ void movies::readFile(string fileAddress) {
     string InName;
     string InGenre;
     string InLimit;
-    int idGenerator=1;
+
     while (file1 >> InName >> InGenre >> InLimit) {
-        movie tmp(InName,InGenre,InLimit,idGenerator);
-        idGenerator++;
+        movie tmp(InName, InGenre, InLimit);
         movieList.emplace_back(tmp);
+        if(file1.eof())
+            tmp.idCounter=1;
     }
     file1.close();
 }
 
 void movies::displayMovies() {
-    cout<<"Movie List\n";
-    cout<<"-------------\n";
-    cout<<"name\t"
-        <<"genre\t"
-        <<"ageLimit "
-        <<"id"<<endl;
-    cout<<"---------------------------\n";
+    cout << "Movie List\n";
+    cout << "-------------\n";
+    cout << "name\t"
+         << "genre\t"
+         << "ageLimit "
+         << "id" << endl;
+    cout << "---------------------------\n";
 
-    for (int i = 0; i < movieList.size(); ++i){
-        cout<<movieList[i].name<<"\t"
-            <<movieList[i].genre<<"\t"
-            <<movieList[i].ageLimit<<"\t"
-            <<movieList[i].id<<endl;
+    for (int i = 0; i < movieList.size(); ++i) {
+        cout << movieList[i].name << "\t"
+             << movieList[i].genre << "\t"
+             << movieList[i].ageLimit << "\t"
+             << movieList[i].id << endl;
     }
 }
 
-bool movies::SearchId(int id)  {
+bool movies::SearchId(int id) {
     for (int i = 0; i < movieList.size(); ++i) {
         if (movieList[i].id == id)
             return true;

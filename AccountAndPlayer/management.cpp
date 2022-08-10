@@ -1,10 +1,10 @@
 #include <iostream>
-#include <vector>
 #include "account.h"
 #include "management.h"
 #include "taxi.h"
 #include "food.h"
 #include "onlineTv.h"
+
 
 void management::ListOfAccounts() {
     for (int i = 0; i < customers.size(); i++) {
@@ -123,19 +123,14 @@ account *management::searchUsername(string username) {
 }
 
 void management::LoginManager() {
-    account *myAccount = nullptr;
-    taxi *myTaxi = nullptr;
-    food *myFood = nullptr;
-    onlineTv *myMovie = nullptr;
 
     movies tmp2;
     tmp2.readFile("D:\\Programming\\CodeBlocks\\project\\filename.txt");
-
     string InUsername;
     string InPass;
-    cout << "enter your username :\n";
+    cout << "Enter your username :\n";
     cin >> InUsername;
-    cout << "enter your password :\n";
+    cout << "Enter your password :\n";
     cin >> InPass;
     if (this->loginCheck(InUsername, InPass)) {
         int index = this->returnIndex(InUsername);
@@ -154,48 +149,20 @@ void management::LoginManager() {
                 cin >> input;
                 this->withdraw(input, index);
             } else if (sop[0] == 't' || sop[0] == 'T') {
-                if (myTaxi == nullptr) {
-                    if (myAccount == nullptr) {
-                        myAccount = this->searchUsername(InUsername);
-                        myTaxi = new taxi(myAccount);
-                    } else {
-                        myTaxi = new taxi(myAccount);
-                    }
-                }
-                myTaxi->order();
-            } else if (sop[0] == 'f' || sop[0] == 'F') {
-                if (myFood == nullptr) {
-                    if (myAccount == nullptr) {
-                        myAccount = this->searchUsername(InUsername);
-                        myFood = new food(myAccount);
-                    } else {
-                        myFood = new food(myAccount);
-                    }
-                }
-                myFood->order();
-            } else if (sop[0] == 'm' || sop[0] == 'M') {
-                if (myMovie == nullptr) {
-                    if (myAccount == nullptr) {
-                        myAccount = this->searchUsername(InUsername);
-                        myMovie = new onlineTv(myAccount);
-                    } else {
-                        myMovie = new onlineTv(myAccount);
-                    }
-                }
-                tmp2.displayMovies();
-                myMovie->order(tmp2);
+                searchUsername(InUsername)->taxiCheck();
+                searchUsername(InUsername)->myTaxi->order();
 
+            } else if (sop[0] == 'f' || sop[0] == 'F') {
+                searchUsername(InUsername)->foodCheck();
+                searchUsername(InUsername)->myFood->order();
+            } else if (sop[0] == 'm' || sop[0] == 'M') {
+                searchUsername(InUsername)->movieCheck();
+                tmp2.displayMovies();
+                searchUsername(InUsername)->myMovie->order(tmp2);
             } else if (sop[0] == 'b' || sop[0] == 'B')
                 DisplayBalance(index);
             else if (sop[0] == 'e' || sop[0] == 'E') {
-                delete myTaxi;
-                delete myFood;
-                delete myAccount;
-                myAccount = nullptr;
-                myTaxi = nullptr;
-                myFood = nullptr;
-                myMovie = nullptr;
-                return;
+                break;
             } else
                 cout << "Wrong Input\n";
         }
@@ -211,14 +178,14 @@ void management::SignUpManager() {
     cin >> InName;
     cout << "Please enter your phone number\n";
     cin >> PhoneNumber;
-    cout << "enter your username :\n";
+    cout << "Enter your username :\n";
     cin >> InUsername;
     while (!this->SignUpCheck(InUsername)) {
         cout << "Username already taken\n";
         cout << "Enter another username\n";
         cin >> InUsername;
     }
-    cout << "enter your password :\n";
+    cout << "Enter your password :\n";
     cin >> InPass;
     while (!management::PassCheck(InPass)) {
         cout << "Your password is too short\n";
@@ -243,4 +210,3 @@ void management::customersDashboard() {
             "      m for movie\n"
             "      e for exit\n";
 }
-
