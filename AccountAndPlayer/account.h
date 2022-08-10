@@ -1,7 +1,8 @@
 #ifndef ACCOUNT_H_INCLUDED
 #define ACCOUNT_H_INCLUDED
 #include <iostream>
-
+#include "management.h"
+//class management;
 using namespace std;
 
 enum class printFlag
@@ -12,6 +13,9 @@ enum class printFlag
 
 class account
 {
+    friend void displayAccount(account &p);
+    friend void management::displayAccount2(account &p);
+    friend class management;
 private:
     long int balance=0;
     string name;

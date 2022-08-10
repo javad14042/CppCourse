@@ -3,12 +3,11 @@
 
 using namespace std;
 
-int main()
-{
+int main() {
 
-matrix sample1(3,3);
-sample1.GetElements();
-cout<<sample1.determinantOfMatrix();
+    matrix sample1(3, 3);
+    sample1.GetElements();
+    cout << sample1.determinantOfMatrix();
 
     return 0;
 }

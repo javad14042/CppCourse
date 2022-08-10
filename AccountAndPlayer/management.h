@@ -4,8 +4,8 @@
 #include <iostream>
 #include <fstream>
 #include <vector>
-#include "account.h"
-
+//#include "account.h"
+class account;
 using namespace std;
 
 class management
@@ -29,6 +29,8 @@ public:
     bool loginCheck(string user,string pass);
     void SignUpCheck(string user);
     void PassCheck(string pass);
+
+    void displayAccount2(account &p);
 };
 
 #endif // MANAGEMENT_H

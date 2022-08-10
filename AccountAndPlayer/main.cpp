@@ -5,7 +5,38 @@
 
 using namespace std;
 
+void displayAccount(account &p){
+    cout << p.balance << endl;
+}
+
 int main() {
+
+    int myNumber1 = 10;
+    int myNumber2 = 20;
+    if(myNumber2 > myNumber1){
+        auto max = myNumber2;
+    }
+    auto sum = myNumber1 + myNumber2;
+
+    account ali;
+    account hasan;
+    if(ali.greaterThan(hasan)){
+
+    }
+    if(ali > hasan){
+        auto max = ali;
+    }
+    ali.print();
+    cout << myNumber2;
+    cout << ali;
+    Number a,b,c,d;
+    auto p = (a+b)*(c+d);
+    auto p = (a.add(b)).multiply(c.add(d));
+    matrix mat1;
+    matrix mat2;
+    auto sum1 = mat1+mat2;
+    auto m1 = mat1*mat2;
+    auto m1 = mat1.multiply(mat2);
 
 
     management branch1;

@@ -3,6 +3,11 @@
 #include <string.h>
 #include "account.h"
 #include "management.h"
+#include "account.h"
+
+void management::displayAccount2(account &p){
+    cout << p.balance << endl;
+}
 
 void management::ListOfAccounts() {
     for (int i = 0; i < customers.size(); i++) {
