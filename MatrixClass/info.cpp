@@ -24,6 +24,31 @@ matrix::matrix(matrix &&source)
     source.Dimensions= nullptr;
 }
 
+matrix &matrix::operator=(const matrix& rhs){
+    for (int i = 0; i < rows; i++) {
+        delete[] Dimensions[i];
+    }
+    delete[] Dimensions;
+
+    rows = rhs.rows;
+    columns = rhs.columns;
+    Dimensions = new int *[rows];
+
+    for (int i = 0; i < rows; i++)
+        Dimensions[i] = new int[columns];
+
+    for (int i = 0; i < rows; i++)
+        for (int j = 0; j < columns; ++j)
+            Dimensions[i][j] = rhs.Dimensions[i][j];
+}
+
+matrix &matrix::operator=(matrix&& rhs){
+    rows = rhs.rows;
+    columns = rhs.columns;
+    Dimensions = rhs.Dimensions;
+    rhs.Dimensions = nullptr;
+}
+
 matrix::~matrix() {
     for (int i = 0; i < rows; i++) {
         delete[] Dimensions[i];
