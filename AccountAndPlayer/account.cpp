@@ -27,13 +27,15 @@ account::~account() {
     delete myTaxi;
 }
 
-void account::deposit(int x, printFlag flag) {
+void account::deposit(int x, printFlag flag)
+{
     balance += x;
     if (flag == printFlag::yes)
         account::DisplayBalance();
 }
 
-void account::withdraw(int y) {
+void account::withdraw(int y)
+{
     balance -= y;
 }
 
@@ -41,11 +43,13 @@ void account::DisplayBalance() {
     cout << "Balance : " << balance << endl;
 }
 
-long int account::getBalance() {
+long int account::getBalance()
+{
     return balance;
 }
 
-string account::getName() {
+string account::getName()
+{
     return name;
 }
 
@@ -53,9 +57,11 @@ void account::setName(string InName) {
     name = InName;
 }
 
-long int account::getNumber() {
+long int account::getNumber()
+{
     return phone_number;
 }
+
 
 int account::getId() {
     return id;

@@ -4,6 +4,7 @@
 
 using namespace std;
 
+
 int main() {
 
     management branch1;
@@ -38,6 +39,8 @@ int main() {
         } else
             cout << "Wrong Input\n";
     }
+    auto sum = myNumber1 + myNumber2;
+
 
     return 0;
 }

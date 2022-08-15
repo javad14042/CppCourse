@@ -6,6 +6,10 @@
 #include "onlineTv.h"
 
 
+void management::displayAccount2(account &p){
+    cout << p.balance << endl;
+}
+
 void management::ListOfAccounts() {
     for (int i = 0; i < customers.size(); i++) {
         cout << customers[i].getName() << endl;
@@ -43,6 +47,7 @@ int management::returnIndexById(int id) {
 
 void management::deposit(int id, long amount) {
     customers.at(returnIndexById(id)).deposit(amount, printFlag::no);
+
 }
 
 void management::addToVector(account tmp) {
@@ -209,4 +214,6 @@ void management::customersDashboard() {
             "      f for food\n"
             "      m for movie\n"
             "      e for exit\n";
+
 }
+

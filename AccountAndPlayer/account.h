@@ -7,6 +7,7 @@
 class food;
 class taxi;
 class onlineTv;
+
 using namespace std;
 
 enum class printFlag
@@ -17,6 +18,9 @@ enum class printFlag
 
 class account
 {
+    friend void displayAccount(account &p);
+    friend void management::displayAccount2(account &p);
+    friend class management;
 private:
     long int balance = 0;
     string name;
@@ -54,6 +58,7 @@ public:
     string getPass();
     void setPass(string InPass);
 
+
     void foodCheck();
     void movieCheck();
     void taxiCheck();
@@ -62,3 +67,4 @@ public:
 };
 
 #endif // ACCOUNT_H_INCLUDED
+

@@ -4,8 +4,8 @@
 #include <iostream>
 #include <fstream>
 #include <vector>
-#include "account.h"
-
+//#include "account.h"
+class account;
 using namespace std;
 
 class management
