@@ -1,120 +1,47 @@
 #include <iostream>
-#include <vector>
 #include "account.h"
 #include "management.h"
 
 using namespace std;
 
-void displayAccount(account &p){
-    cout << p.balance << endl;
-}
 
 int main() {
 
-    int myNumber1 = 10;
-    int myNumber2 = 20;
-    if(myNumber2 > myNumber1){
-        auto max = myNumber2;
-    }
-    auto sum = myNumber1 + myNumber2;
-
-    account ali;
-    account hasan;
-    if(ali.greaterThan(hasan)){
-
-    }
-    if(ali > hasan){
-        auto max = ali;
-    }
-    ali.print();
-    cout << myNumber2;
-    cout << ali;
-    Number a,b,c,d;
-    auto p = (a+b)*(c+d);
-    auto p = (a.add(b)).multiply(c.add(d));
-    matrix mat1;
-    matrix mat2;
-    auto sum1 = mat1+mat2;
-    auto m1 = mat1*mat2;
-    auto m1 = mat1.multiply(mat2);
-
-
     management branch1;
-/*branch1.readFile();
-branch1.ListOfAccounts();*/
-
+    //  branch1.readFile( "D:\\Programming\\CodeBlocks\\project\\filename.txt");
     account amir;
     amir.setUsername("amir");
     amir.setPass("123");
     amir.setName("amir");
+    amir.setBalance(1000);
     branch1.addToVector(amir);
 
     account reza;
     reza.setUsername("reza");
-    reza.setPass("321");
+    reza.setPass("123");
     reza.setName("reza");
+    reza.setBalance(1000);
     branch1.addToVector(reza);
-    char op;
-    string InUsername;
-    string InPass;
 
-    while (1) {
-        cout << "enter l for login or s for sign up e for exit\n";
-        cin >> op;
-        if (op == 'l' || op == 'L') {
-            cout << "enter your username :\n";
-            cin >> InUsername;
-            cout << "enter your password :\n";
-            cin >> InPass;
-            if (branch1.loginCheck(InUsername, InPass)) {
-                while (1) {
-                    cout << "Enter d for deposit w for withdraw b for displaying balance e for exit\n";
-                    cin >> op;
-                    if (op == 'd' || op == 'D') {
-                        cout << "How much do you want to deposit?\n";
-                        int input;
-                        cin >> input;
-                        branch1.deposit(input, branch1.returnIndex(InUsername));
-                    } else if (op == 'w' || op == 'W') {
-                        cout << "How much do you want to withdraw?\n";
-                        int input;
-                        cin >> input;
-                        branch1.withdraw(input, branch1.returnIndex(InUsername));
-                    } else if (op == 'b' || op == 'B')
-                        branch1.DisplayBalance(branch1.returnIndex(InUsername));
-                    else if (op == 'e' || op == 'E')
-                        break;
-                    else
-                        cout << "Wrong Input\n";
-                }
-            }
+    string sop;
 
-        } else if (op == 's' || op == 'S') {
-            string InName;
-            long int PhoneNumber;
-            cout << "Please enter your name\n";
-            cin >> InName;
-            cout << "Please enter your phone number\n";
-            cin >> PhoneNumber;
-            cout << "enter your username :\n";
-            cin >> InUsername;
-            branch1.SignUpCheck(InUsername);
-            cout << "enter your password :\n";
-            cin >> InPass;
-            branch1.PassCheck(InPass);
-            account tmp(InName, PhoneNumber);
-            tmp.setUsername(InUsername);
-            tmp.setPass(InPass);
-            branch1.addToVector(tmp);
-            cout << branch1.returnIndex("asghar");
-        } else if (op == 'e' || op == 'E')
+
+    while (true) {
+        cout << "Enter l for login or s for sign up e for exit\n";
+        cin >> sop;
+        if (sop[0] == 'l' || sop[0] == 'L')
+            branch1.LoginManager();
+        else if (sop[0] == 's' || sop[0] == 'S')
+            branch1.SignUpManager();
+        else if (sop[0] == 'e' || sop[0] == 'E') {
+            cout << "Goodbye\n";
             break;
-        else
+        } else
             cout << "Wrong Input\n";
     }
+    auto sum = myNumber1 + myNumber2;
+
 
     return 0;
 }
-
-
 

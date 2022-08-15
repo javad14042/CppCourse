@@ -34,6 +34,10 @@ student createstudent(student &input){
     return input; // return an object
 }
 
+void printStudent(const student input){
+    input.printScores();
+}
+
 int main() {
 
 /*    vector<int> vec1;
@@ -61,7 +65,7 @@ int main() {
     cout << "after" << endl;
     cout << obj1.b[0] << endl;
     cout << obj2.b[0] << endl;*/
-    // copy constructor
+/*    // copy constructor
     // pass by value
     // return a non-temporary object
     // construct one object base on another object
@@ -76,59 +80,60 @@ int main() {
     student stuTmp2("Javad",10,16,14);
 //    student stuTmp3 = student("Javad",10,16,14); // construct one object base on temporary object
     studentManager class1;
-    class1.students.emplace_back("Amir",12,15,12);
+    class1.students.emplace_back(student("Amir",12,15,12));
     cout << "class1.students[0] : " << &(class1.students[0]) << endl;
     class1.students.emplace_back(stuTmp2); // pass by value
     class1.students.emplace_back(stuTmp2); // pass by value
     getstudent(stuTmp2);
     student copiedStudent(stuTmp2);
 
-//    auto  tmp3 = createstudent();
-//    cout << "tmp3 : " << &tmp3 << endl;
+    auto  tmp3 = createstudent();
+    cout << "tmp3 : " << &tmp3 << endl;
 //    string path="sample.txt";
 //    studentManager class1(path);
 //    class1.ReadFile();
 //    class1.printStudents();
 //    cout<<"\n\n\n\n";
 
-/*    class1.ChangeScores("amir",subjects::physics,0);
+    class1.ChangeScores("amir",subjects::physics,0);
     auto  tmp4 = createstudent(tmp3);
     cout << "tmp4 : " << &tmp4 << endl;
-    cout << "Line : " << __LINE__ << endl;
+//    cout << "Line : " << __LINE__ << endl;
     auto tmp5 = tmp4; // construct one object base on another object
-    cout << "Line : " << __LINE__ << endl;
+//    cout << "Line : " << __LINE__ << endl;
     cout << "tmp5 : " << &tmp5 << endl;
-    cout << "class1.students[0] : " << &(class1.students[0]) << endl;
-    cout << "class1.students[1] : " << &(class1.students[1]) << endl;
-    cout << "students.capacity() : " << class1.students.capacity() << endl;*/
-/*    ifstream file1("sample.txt");
-    char tmp1[100]{'\0'};
-    double tmp2;
-    double tmp3;
-    double tmp4;
-    while (file1 >> tmp1 >> tmp2 >> tmp3 >> tmp4) {
-        student stuTmp;
-        char tmpName[20];
-        stuTmp.name = tmp1;
-        stuTmp.math = tmp2;
-        stuTmp.physics = tmp3;
-        stuTmp.chemistry = tmp4;
-
-        stuTmp.calculateAverage();
-    }
-    file1.close();
-    cout << "end of reading scores" << endl;*/
+//    cout << "class1.students[0] : " << &(class1.students[0]) << endl;
+//    cout << "class1.students[1] : " << &(class1.students[1]) << endl;
+//    cout << "students.capacity() : " << class1.students.capacity() << endl;
 
 //    class1.ChangeScores("amir",subjects::physics,0);
 //
- /*   class1.printStudents();
+    class1.printStudents();
     class1.students.at(2).totalAverage[0] = 11;
     cout << endl;
     class1.printStudents();
 
+
+
+
+// //lvalue -> addressable
+// int x= 200;
+// int &a = x;
+// cout << &x << endl;
+// cout << &a << endl;
+// //rvalue -> not addressable
+// int &&b = 300;
+
 */
 
+    student NonConstStudent("Javad",10,16,14);
+    NonConstStudent.calculateAverage();
+    NonConstStudent.printScores();
 
+    const student constStudent("Amir",19,20,16);
+    constStudent.printScores();
+
+    const double pi{3.14};
 
     return 0;
 }

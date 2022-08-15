@@ -1,6 +1,7 @@
-amir 123 2021234 200
-ali 124 20212554 320
-javad 130 2021454 789
-reza 143 2021445433 10
-hassan 150 20546856 1000
+a drama 16
+b comedy 18
+c fantasy 13
+d action general
+
+
 

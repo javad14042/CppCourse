@@ -34,6 +34,13 @@ student::student(const student &source)
     << " count of objects : " << count << " p : " << totalAverage << endl;
 }
 
+student::student(student &&source)
+: name{source.name}, math{source.math}, physics{source.physics}, chemistry{source.chemistry}, totalAverage{source.totalAverage} {
+    source.totalAverage = nullptr;
+    cout << "move constructor calls from  " << &source << " to "  << this
+         << " count of objects : " << count << " p : " << totalAverage << endl;
+}
+
 double student::calculateAverage()
 {
     double sum = 0;
@@ -43,6 +50,14 @@ double student::calculateAverage()
 
     average = sum/3;
     return average;
+}
+
+void student::printScores() const{
+    cout << name << " : ";
+    cout << math << " , ";
+    cout << physics << " , ";
+    cout << chemistry << " , ";
+    cout << average << endl;
 }
 
 student::~student() {
