@@ -5,7 +5,7 @@
 using namespace std;
 
 matrix::matrix(const int Inrows, const int Incolumns)
-        : rows{Inrows}, columns{Incolumns} {
+: rows{Inrows}, columns{Incolumns} {
     Dimensions = new double *[rows];
 
     for (int i = 0; i < rows; i++)
@@ -13,21 +13,29 @@ matrix::matrix(const int Inrows, const int Incolumns)
 }
 
 matrix::matrix(const matrix &source)
-        : rows{source.rows}, columns{source.columns} {
+: rows{source.rows}, columns{source.columns} {
+
+    Dimensions = new double *[rows];
+
     for (int i = 0; i < rows; i++)
-        for (int j = 0; j < columns; ++j) {
-            source.Dimensions[i][j] = Dimensions[i][j];
+        Dimensions[i] = new double[columns];
+
+    for (int i = 0; i < rows; i++) {
+        for (int j = 0; j < columns; j++) {
+            Dimensions[i][j] = source.Dimensions[i][j];
         }
+    }
 }
 
 matrix::matrix(matrix &&source)
-        : rows{source.rows}, columns{source.columns}, Dimensions{source.Dimensions} {
+: rows{source.rows}, columns{source.columns}, Dimensions{source.Dimensions} {
     source.Dimensions = nullptr;
 }
 
 matrix::~matrix() {
+    if(Dimensions == nullptr) return;
     for (int i = 0; i < rows; i++) {
-        delete[] Dimensions[i];
+        delete[] Dimensions[i]; // Dimensions + i
     }
     delete[] Dimensions;
 }
@@ -113,12 +121,9 @@ matrix matrix::kahad(int i, int j) {
                 tmp.Dimensions[k - 1][l - 1] = Dimensions[k][l];
             else if (k > i && l < j)
                 tmp.Dimensions[k - 1][l] = Dimensions[k][l];
-
         }
     }
-
     return tmp;
-
 }
 
 matrix matrix::inverseMatrix() {
@@ -126,8 +131,8 @@ matrix matrix::inverseMatrix() {
     if (rows == 2 && columns == 2) {
         temp.Dimensions[0][0] = Dimensions[1][1];
         temp.Dimensions[1][1] = Dimensions[0][0];
-        temp.Dimensions[0][1] = -1*Dimensions[0][1];
-        temp.Dimensions[1][0] = -1*Dimensions[1][0];
+        temp.Dimensions[0][1] = -1 * Dimensions[0][1];
+        temp.Dimensions[1][0] = -1 * Dimensions[1][0];
 
         for (int i = 0; i < rows; ++i)
             for (int j = 0; j < columns; ++j)
@@ -143,6 +148,84 @@ matrix matrix::inverseMatrix() {
     return temp;
 }
 
+matrix &matrix::operator=(const matrix &rhs) {
+
+    for (int i = 0; i < rows; i++)
+        delete[] Dimensions[i];
+    delete[] Dimensions;        //delete
+
+    rows = rhs.rows;            //assigning
+    columns = rhs.columns;
+    Dimensions = new double *[rows];
+
+    for (int i = 0; i < rows; i++)
+        Dimensions[i] = new double[columns];
+
+    for (int i = 0; i < rows; i++) {            //new values
+        for (int j = 0; j < columns; j++) {
+            Dimensions[i][j] = rhs.Dimensions[i][j];
+        }
+    }
+    return *this;
+}
+
+matrix &matrix::operator=(matrix &&rhs) {
+//    for (int i = 0; i < rows; i++)
+//        delete[] Dimensions[i];
+//    delete[] Dimensions;        //delete
+    Dimensions = rhs.Dimensions;
+    rhs.Dimensions = nullptr;
+    return *this;
+}
+
+matrix matrix::operator+(const matrix &rhs) {
+    matrix answer(rows, columns);
+
+    for (int i = 0; i < rows; i++) {
+        for (int j = 0; j < columns; j++) {
+            answer.Dimensions[i][j] = Dimensions[i][j] + rhs.Dimensions[i][j];
+        }
+    }
+    return answer;
+}
+
+matrix matrix::operator*(const matrix &rhs) {
+    matrix answer(rows, rhs.columns);
+
+    if (columns == rhs.rows) {
+        for (int i = 0; i < rows; i++) {
+            for (int j = 0; j < rhs.columns; j++) {
+                answer.Dimensions[i][j] = 0;
+                for (int k = 0; k < rhs.rows; k++) {
+                    answer.Dimensions[i][j] += Dimensions[i][k] * rhs.Dimensions[k][j];
+                }
+            }
+        }
+        return answer;
+    } else
+        return matrix(2, 2);
+}
+
+ostream &operator<<(ostream &out, const matrix &c) {
+    for (int i = 0; i < c.rows; i++) {
+        for (int j = 0; j < c.columns; j++) {
+            cout << c.Dimensions[i][j] << " ";
+        }
+        cout << "\n";
+    }
+    return out;
+}
+
+istream &operator>>(istream &in,  matrix &c) {
+    cout << "Please enter elements for matrix :\n";
+
+    for (int i = 0; i < c.rows; i++) {
+        for (int j = 0; j < c.columns; j++) {
+            in >> c.Dimensions[i][j];
+        }
+    }
+    return in;
+}
 
 
 

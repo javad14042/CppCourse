@@ -1,17 +1,27 @@
 #ifndef INFO_H_INCLUDED
 #define INFO_H_INCLUDED
+#include <iostream>
+
+using namespace std;
 
 class matrix {
 public:
-
-    const int rows;
-    const int columns;
+     int rows;
+     int columns;
     double **Dimensions;
 
-    explicit matrix(const int rows = 2, const int columns = 2);
+    friend ostream & operator << (ostream &out, const matrix &c);
+    friend istream & operator >> (istream &in,  matrix &c);
+
+    explicit matrix(int rows = 2,int columns = 2);
     matrix(const matrix &source);
     matrix(matrix &&source);
     ~matrix();
+
+    matrix &operator=(const matrix &rhs);
+    matrix &operator=(matrix &&rhs);
+    matrix operator+(const matrix &rhs);
+    matrix operator*(const matrix &rhs);
 
     void GetElements();
     void PrintfMatrix();
