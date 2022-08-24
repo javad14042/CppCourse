@@ -1,4 +1,5 @@
 #include "customer.h"
+#include <iostream>
 
 
 bool customer::isIranian() {
@@ -9,4 +10,11 @@ bool customer::isIranian() {
 void customer::SetName(string inName) {
     person::SetName(inName);
     balance += 50;
+    protectedMemberPerson = 10;
+}
+
+void customer::printAddresses() {
+    person::printAddresses();
+    cout << "balance = " << &balance << endl;
+    cout << "history = " << &history << endl;
 }
