@@ -1,21 +1,18 @@
 #ifndef SHAPES_CUSTOMER_H
 #define SHAPES_CUSTOMER_H
 
-#include "person.h"
+#include "account.h"
 
 //class drive : specific_access Base { };
-class customer : public person{
+class customer : public account{
 public:
     double balance;
 
+    customer();
+    explicit customer(double InBalance);
+
     void SetName(string);
-
     bool isIranian();
-
-protected:
-
-private:
-
 };
 
 

@@ -1,10 +1,7 @@
-#include <string>
-
-using namespace std;
-
 #ifndef SHAPES_PERSON_H
 #define SHAPES_PERSON_H
-
+#include <string>
+using namespace std;
 
 class person {
 public:

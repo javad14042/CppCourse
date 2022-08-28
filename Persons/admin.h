@@ -1,9 +1,9 @@
 #ifndef SHAPES_ADMIN_H
 #define SHAPES_ADMIN_H
 
-#include "person.h"
+#include "account.h"
 
-class admin : public person {
+class admin : public account {
 public:
     void getCustomerList();
 };
