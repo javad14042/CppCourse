@@ -11,6 +11,8 @@ private:
 public:
     account();
     account(string InUsername, string InPassword);
+    account(const account &source);
+    account &operator=(const account &);
     void setPass(string InPassword);
     void setUser(string InUsername);
 

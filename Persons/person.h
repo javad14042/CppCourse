@@ -5,8 +5,8 @@ using namespace std;
 
 class person {
 public:
-    string name;
-    string nationalCode;
+//    string name;
+//    string nationalCode;
 
     string getName();
     void SetName(string);

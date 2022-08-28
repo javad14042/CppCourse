@@ -5,11 +5,15 @@
 
 //class drive : specific_access Base { };
 class customer : public account{
+//    using account::account;
 public:
     double balance;
 
     customer();
     explicit customer(double InBalance);
+    customer(double InBalance,string username,string password);
+    customer(const customer &);
+    customer &operator=(const customer &);
 
     void SetName(string);
     bool isIranian();
