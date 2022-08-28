@@ -1,8 +1,8 @@
 #include "circle.h"
 #include "cmath"
 
-circle::circle() { radius = 1; }
-
+circle::circle(): circle(1) {
+}
 
 circle::circle(double InRadius)
         : radius{InRadius} {}

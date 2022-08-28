@@ -8,7 +8,7 @@ public:
     double width;
 
     rectangle();
-    rectangle(double InLength, double InWidth );
+    rectangle(double InLength, double InWidth);
 
     double getArea();
     double getPerimeter();
