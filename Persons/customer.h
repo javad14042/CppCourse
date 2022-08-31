@@ -14,6 +14,8 @@ public:
     customer(double InBalance,string username,string password);
     customer(const customer &);
     customer &operator=(const customer &);
+    customer(customer &&);
+    customer &operator=(customer &&);
 
     void SetName(string);
     bool isIranian();

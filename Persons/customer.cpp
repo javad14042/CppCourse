@@ -34,4 +34,17 @@ customer &customer::operator=(const customer &rhs) {
     return *this;
 }
 
+customer::customer(customer&& source): account(source),balance{source.balance} {
+    source.balance=0;
+}
+
+customer &customer::operator=(customer && rhs) {
+    if(this == &rhs) return *this;
+    account::operator=(rhs);
+    balance = rhs.balance;
+    cout << "move assignment customer called" << endl;
+    return *this;
+
+}
+
 
