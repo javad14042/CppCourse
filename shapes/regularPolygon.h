@@ -9,7 +9,8 @@ public:
 
     regularPolygon(int InSideNumber,double InSideLength);
 
-    double getPerimeter();
+    virtual double getPerimeter();
+    virtual double getArea();
 };
 
 

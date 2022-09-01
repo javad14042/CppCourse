@@ -9,8 +9,8 @@ public:
     circle();
     circle(double InRadius);
 
-    double getArea();
-    double getPerimeter();
+    virtual double getArea();
+    virtual double getPerimeter();
 
 };
 
