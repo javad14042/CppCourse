@@ -7,11 +7,9 @@
 class subnet :public address{
 public:
     string ip;
-    string mask;
+    unsigned int mask;
 
     string getAddress();
-
-
 };
 
 
