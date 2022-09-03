@@ -1,6 +1,10 @@
 #include <iostream>
 #include "hostname.h"
 #include "subnet.h"
+#include "address_manager.h"
+#include "string"
+
+using namespace std;
 
 
 //bool checkIp(const string& ip ){
@@ -32,6 +36,8 @@ int main() {
 //    int *number = new int;
 //    delete number;
 //    hostname *addr3 = new hostname;
+
+/*
     hostname addr1;
     subnet addr2;
     addr1.ip = "10.10.10.0";
@@ -41,5 +47,16 @@ int main() {
     cout << addr1.getAddress() << endl;
     cout << addr2.getAddress() << endl;
     cout << addr2.getAddress() << endl;
+*/
+
+    address_manager ad1;
+    string str="192.32.188.-9/5";
+    if (ad1.subnetCheck(str))
+        cout<<"hi"<<endl;
+    else if(!ad1.subnetCheck(str))
+        cout<<"hoy"<<endl;
+
+
+
     return 0;
 }

@@ -9,7 +9,9 @@ public:
     string ip;
     unsigned int mask;
 
-    string getAddress();
+    subnet(string InIp);
+
+virtual string getAddress();
 };
 
 

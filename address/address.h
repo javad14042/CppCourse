@@ -9,7 +9,7 @@ public:
     string name;
 
     string getName();
-    string getAddress();
+    virtual string getAddress();
 
 };
 

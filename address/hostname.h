@@ -6,7 +6,8 @@ class hostname :public address {
 public:
     string ip;
 
-    string getAddress();
+     hostname(string InIp);
+    virtual string getAddress();
 
 
 };
