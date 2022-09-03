@@ -4,8 +4,8 @@
 
 class shapes {
 public:
-    virtual double getArea();
-    virtual double getPerimeter();
+    double getArea();
+    double getPerimeter();
 };
 
 #endif //SHAPES_SHAPES_H

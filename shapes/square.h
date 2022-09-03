@@ -8,7 +8,7 @@ public:
     square();
     square(double InLength);
 
-    virtual double getArea();
+    double getArea();
 };
 
 

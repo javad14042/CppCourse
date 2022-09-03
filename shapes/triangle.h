@@ -7,7 +7,7 @@ public:
     triangle();
     triangle(double InLength);
 
-    virtual double getArea();
+    double getPerimeter();
 };
 
 

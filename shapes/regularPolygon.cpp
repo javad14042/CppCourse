@@ -7,7 +7,3 @@ regularPolygon::regularPolygon(int InSideNumber, double InSideLength)
 double regularPolygon::getPerimeter() {
     return sideLength*sideNumber;
 }
-
-double regularPolygon::getArea() {
-    return 1.0001;
-}
