@@ -7,7 +7,9 @@ public:
     string ip;
 
      hostname(string InIp);
-    virtual string getAddress();
+     virtual ~hostname(){};
+
+    string getAddress() override;
 
 
 };

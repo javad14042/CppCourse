@@ -5,17 +5,20 @@
 #include "address.h"
 
 class address_manager {
-protected:
+private:
     vector<address*>listOfAddresses;
 
-    void displayData();
 public:
+    void displayData();
+    void hostnameBuilder(string);
+    void subnetBuilder(string,unsigned int);
+protected:
     bool hostnameCheck(string);
     bool subnetCheck(string);
     bool IpCheck(string);
     bool MaskCheck(string);
-    void hostnameBuilder();
-    void subnetBuilder();
+    bool lengthCheck(string);
+
 
 };
 

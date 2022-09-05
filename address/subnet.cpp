@@ -1,10 +1,10 @@
 #include "subnet.h"
 
-string subnet::getAddress() {
-    return ip + "/" + to_string(mask);
+subnet::subnet(string InIp,unsigned int InMask) :ip{InIp},mask{InMask}{
+
 }
 
-subnet::subnet(string InIp) :ip{InIp}{
-
+string subnet::getAddress() {
+    return ip + "/" + to_string(mask);
 }
 
