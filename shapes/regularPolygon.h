@@ -8,6 +8,7 @@ public:
     double sideLength;
 
     regularPolygon(int InSideNumber,double InSideLength);
+    virtual ~regularPolygon(){};
 
     double getPerimeter();
 };

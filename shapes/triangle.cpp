@@ -1,12 +1,14 @@
 #include "triangle.h"
-#include "cmath"
 
-triangle::triangle(): triangle(1){
+triangle::triangle(): triangle(1,1,1) {
 }
 
-triangle::triangle(double InLength) : regularPolygon(3, InLength) {
+triangle::triangle(double InSide1,double InSide2,double InSide3)
+: side1{InSide1},side2{InSide2},side3{InSide3} {
 }
 
 double triangle::getPerimeter() {
-    return (0.4330*pow(sideLength,2));
+    return side1+side2+side3;
 }
+
+

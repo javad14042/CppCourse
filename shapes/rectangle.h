@@ -9,8 +9,9 @@ public:
 
     rectangle();
     rectangle(double InLength, double InWidth);
+    virtual ~rectangle(){};
 
-    double getArea();
+    double getArea() override;
     double getPerimeter();
 };
 

@@ -7,8 +7,9 @@ class square : public regularPolygon {
 public:
     square();
     square(double InLength);
+    virtual ~square(){};
 
-    double getArea();
+    double getArea() override;
 };
 
 

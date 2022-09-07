@@ -1,13 +1,19 @@
 #ifndef SHAPES_TRIANGLE_H
 #define SHAPES_TRIANGLE_H
-#include "regularPolygon.h"
+#include "shapes.h"
 
-class triangle: public regularPolygon{
+class triangle: public shapes{
 public:
-    triangle();
-    triangle(double InLength);
+    double side1;
+    double side2;
+    double side3;
 
-    double getPerimeter();
+    triangle();
+    triangle(double,double,double);
+    ~triangle() override{};
+
+     double getPerimeter() override;
+
 };
 
 

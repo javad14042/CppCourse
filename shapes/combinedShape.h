@@ -5,13 +5,11 @@
 
 using namespace std;
 
-
 class combinedShape {
 public:
     vector<shapes*>shapeList;
 
     double totalArea();
 };
-
 
 #endif //SHAPES_COMBINEDSHAPE_H
