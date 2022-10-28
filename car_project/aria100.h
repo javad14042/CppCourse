@@ -9,8 +9,8 @@ private:
     int direction;          //-180 to 180
     //int extreme_Turn_Left_angle;
 
-    void gasPedal(int) override;
-    void brakePedal(int) override;
+    void gasPedal(char) override;
+    void brakePedal(char) override;
     void turn(int,char) override;
 
     void extreme_Gas() override;
@@ -24,7 +24,13 @@ private:
 
     void gasAction(char);
     void brakeAction(char);
-    int directionCalculator(int) ;
+    int directionCalculator(int);
+    int extremeGasLevel=4;
+    int moderateGasLevel=2;
+    int extremeBrakeLevel=4;
+    int moderateBrakeLevel=2;
+    bool checkGasLevels(int,char);
+    bool checkBrakeLevels(int,char);
 public:
     aria100();
     aria100(double InSpeed,int InDirection);
@@ -32,6 +38,7 @@ public:
     int fuel;
     void menu() override;
     void showDetails() const;
+     void setting();
     //carBody
     void carTrunkStatus(doorPosition) override;
     void doorStatus(doorPosition,unsigned int) override;

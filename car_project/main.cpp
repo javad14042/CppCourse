@@ -2,11 +2,11 @@
 #include "aria100.h"
 
 int main() {
-    ariaCar *a = new aria100(10,30);
-  // ariaCar *b = new aria200(10,30);
+    ariaCar *a = new aria100(10, 30);
+    // ariaCar *b = new aria200(10,30);
 
- //aria100 a(10,30);
- a->menu();
+    //aria100 a(10,30);
+    a->menu();
 
 
  /*
@@ -38,7 +38,6 @@ int main() {
   *         smart_pointer<some_class> ptr = ...;
   *         RAII;
   * */
-
 
 
  return 0;
