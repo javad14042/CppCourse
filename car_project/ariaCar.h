@@ -2,9 +2,20 @@
 #define CAR_ARIACAR_H
 
 #include "carBody.h"
-#include "movement.h"
+#include "ariaMovement.h"
 
-class ariaCar :public carBody,public movement{
+    /*
+     * movement -> ariaCar -> aria100
+     * movement *car1 = new aria100();
+     *
+     * movement -> ariaMovement (movement)
+     * body -> ariaBody
+     * ariaCar  -> aria100 (car)
+     *          -> aria200
+    * */
+
+
+class ariaCar :public carBody , public ariaMovement{
 public:
      virtual void extreme_Gas()=0;
      virtual void moderate_Gas()=0;

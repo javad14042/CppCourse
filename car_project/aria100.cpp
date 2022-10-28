@@ -1,6 +1,9 @@
 #include <iostream>
 #include "aria100.h"
 
+
+
+
 aria100::aria100(): aria100(0,0) {
 }
 
@@ -109,40 +112,9 @@ void aria100::menu() {
     }
 }
 
-void aria100::gasAction(char c) {
-    if (c == 'e') {
-        speed +=5*extremeGasLevel;
-        std::cout << "You have committed extreme gas" << std::endl;
-    } else {
-        speed +=5*moderateGasLevel;
-        std::cout << "You have committed moderate gas" << std::endl;
-    }
-}
-
-void aria100::brakeAction(char c) {
-    if (c == 'e') {
-        speed -=5*extremeBrakeLevel;
-        std::cout << "You have committed extreme brake" << std::endl;
-    } else {
-        speed -=5*moderateBrakeLevel;
-        std::cout << "You have committed moderate brake" << std::endl;
-    }
-}
-
-int aria100::directionCalculator(int input)  {
-    direction += input;
-    if (direction > 180) {
-        direction -= 360;
-        return direction;
-    } else if (direction < -180) {
-        direction += 360;
-        return direction;
-    } return direction;
-}
-
 void aria100::extreme_Gas() {
-    fuel--;
-    gasAction('e');
+    std::cout << "You have committed extreme gas" << std::endl;
+    gasPedal(extremeGasLevel);
     if (speed >= 120) {
         std::cout << "Your speed is over the limit" << std::endl;
         std::cout << "Please slow down" << std::endl<< std::endl;
@@ -150,8 +122,8 @@ void aria100::extreme_Gas() {
 }
 
 void aria100::moderate_Gas() {
-    fuel--;
-    gasAction('m');
+    std::cout << "You have committed moderate gas" << std::endl;
+    gasPedal(moderateGasLevel);
     if (speed >= 120) {
         std::cout << "Your speed is over the limit" << std::endl;
         std::cout << "Please slow down" << std::endl;
@@ -159,13 +131,13 @@ void aria100::moderate_Gas() {
 }
 
 void aria100::extreme_Brake() {
-    fuel--;
-    brakeAction('e');
+    std::cout << "You have committed extreme brake" << std::endl;
+    brakePedal(extremeBrakeLevel);
 }
 
 void aria100::moderate_Brake() {
-    fuel--;
-    brakeAction('m');
+    std::cout << "You have committed moderate brake" << std::endl;
+    brakePedal(moderateBrakeLevel);
 }
 
 void aria100::extreme_Turn_Right() {
@@ -186,28 +158,6 @@ void aria100::extreme_Turn_Left() {
 void aria100::moderate_Turn_Left() {
     std::cout<<"You committed moderate turn to left"<<std::endl;
     fuel--;
-}
-
-void aria100::gasPedal(char intensity) {
-    if (intensity == 'e')
-        extreme_Gas();
-    else if (intensity == 'm')
-        moderate_Gas();
-    else {
-        std::cout << "Wrong input\n";
-        std::cout << "Your input should be m or e\n";
-    }
-}
-
-void aria100::brakePedal(char intensity) {
-    if (intensity == 'e')
-        extreme_Brake();
-    else if (intensity == 'm')
-        moderate_Brake();
-    else {
-        std::cout << "Wrong input\n";
-        std::cout << "Your input should be m or e \n";
-    }
 }
 
 void aria100::turn(int intensity, char _direction) {

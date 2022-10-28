@@ -2,8 +2,16 @@
 #define CAR_ARIAMOVEMENT_H
 #include "movement.h"
 
-class ariaMovement {
-
+class ariaMovement : public movement{
+public:
+    ariaMovement();
+    void gasPedal(double) final;
+    void brakePedal(double) final;
+    void turn(double) final;
+protected:
+    double speed;
+    double direction;
+    int fuel;
 };
 
 

@@ -4,10 +4,10 @@
 
 class movement {
 public:
-    virtual void gasPedal(char)=0;
-    virtual void brakePedal(char)=0;
-    virtual void turn(int,char)=0;
-    virtual void displayAmountOfFuel() const=0;
+    virtual void gasPedal(double)=0;
+    virtual void brakePedal(double)=0;
+    virtual void turn(double)=0;
+//    virtual void displayAmountOfFuel() const=0;
 };
 
 
