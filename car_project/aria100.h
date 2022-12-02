@@ -2,11 +2,10 @@
 #define CAR_ARIA100_H
 
 #include "ariaCar.h"
-
+#include "ariaMovement.h"
 
 class aria100 :public ariaCar{
 private:
-
     int extremeGasLevel=4;
     int moderateGasLevel=2;
     int extremeBrakeLevel=4;
@@ -14,11 +13,10 @@ private:
 
 public:
     aria100();
-    aria100(double InSpeed,int InDirection);
-
+    aria100(double InSpeed,double InDirection);
     void menu() override;
     void showDetails() const;
-     void setting();
+    void setting();
     //carBody
     void carTrunkStatus(doorPosition) override;
     void doorStatus(doorPosition,unsigned int) override;
@@ -34,13 +32,11 @@ public:
     void extreme_Turn_Left() override;
     void moderate_Turn_Right() override;
     void moderate_Turn_Left() override;
+    void turnAction(char,char) ;
 
 private:
-
-    int directionCalculator(int);
-
-    bool checkGasLevels(int,char);
-    bool checkBrakeLevels(int,char);
+    bool checkGasLevels(int,char) const;
+    bool checkBrakeLevels(int,char) const;
 
 };
 

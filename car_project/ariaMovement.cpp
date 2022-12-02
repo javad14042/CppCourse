@@ -1,6 +1,16 @@
 #include "ariaMovement.h"
+#include <iostream>
 
-ariaMovement::ariaMovement() : speed{0.0}, fuel{10} {
+ariaMovement::ariaMovement(double InSpeed, double InDirection, int InFuel) : speed{InSpeed}, direction{InDirection},
+                                                                             fuel{InFuel} {
+
+}
+
+ariaMovement::ariaMovement(double InSpeed, double InDirection) : ariaMovement(InSpeed, InDirection, 10) {
+
+}
+
+ariaMovement::ariaMovement() : speed{0.0},direction{0.0}, fuel{10} {
 
 }
 
@@ -21,4 +31,7 @@ void ariaMovement::turn(double input) {
     else if (direction < -180) direction += 360;
 }
 
+void ariaMovement::displayAmountOfFuel()  {
+    std::cout << ariaMovement::fuel << "/10 is full" << std::endl;
+}
 

@@ -3,7 +3,6 @@
 
 #include "carBody.h"
 #include "ariaMovement.h"
-
     /*
      * movement -> ariaCar -> aria100
      * movement *car1 = new aria100();
@@ -13,10 +12,9 @@
      * ariaCar  -> aria100 (car)
      *          -> aria200
     * */
-
-
 class ariaCar :public carBody , public ariaMovement{
 public:
+    ariaCar(double ,double );
      virtual void extreme_Gas()=0;
      virtual void moderate_Gas()=0;
      virtual void extreme_Brake()=0;

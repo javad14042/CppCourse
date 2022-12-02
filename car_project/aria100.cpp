@@ -1,5 +1,6 @@
 #include <iostream>
 #include "aria100.h"
+#include "ariaMovement.h"
 
 
 
@@ -7,13 +8,12 @@
 aria100::aria100(): aria100(0,0) {
 }
 
-aria100::aria100(double InSpeed, int InDirection):speed{InSpeed},direction{InDirection} {
-    fuel=10;
+aria100::aria100(double InSpeed, double InDirection): ariaCar(InSpeed,InDirection) {
+
 }
 
 void aria100::showDetails() const {
     std::cout << "speed: " << speed << "  direction: " << direction <<std::endl;
-    displayAmountOfFuel();
 }
 
 void aria100::carTrunkStatus(doorPosition status) {
@@ -28,10 +28,6 @@ void aria100::hoodStatus(doorPosition status) {
         std::cout << "hood is open\n";
     else if (status == doorPosition::close)
         std::cout << "hood is close\n";
-}
-
-void aria100::displayAmountOfFuel() const {
-    std::cout << fuel << "/10 is full" << std::endl;
 }
 
 void aria100::action_arrangingTheSeats(unsigned int input) {
@@ -66,7 +62,7 @@ void aria100::action_doorStatus(doorPosition status, unsigned int doorNum) {
 
 void aria100::menu() {
     char op;
-    int intensity;
+    char intensity;
     char charIntensity;
     while (true) {
         std::cout << "\nPress following commands:\n"
@@ -87,22 +83,31 @@ void aria100::menu() {
             std::cout << "Enter e for extreme gas and m for moderate gas\n";
             std::cin >> charIntensity;
             charIntensity = (char) tolower(charIntensity);
-            gasPedal(charIntensity);
+            if (charIntensity=='e')
+                extreme_Gas();
+            else if (charIntensity=='m')
+                moderate_Gas();
+            else  std::cout<<"Wrong input\n\n";
         } else if (op == 'b') {
             std::cout << "Enter the intensity of pressing the brake pedal from 1 to 5\n";
             std::cin >> charIntensity;
             charIntensity = (char) tolower(charIntensity);
-            brakePedal(charIntensity);
+            if (charIntensity=='e')
+                extreme_Brake();
+            else if (charIntensity=='m')
+                moderate_Brake();
+            else  std::cout<<"Wrong input\n\n";
         } else if (op == 't') {
             char _direction;
-            std::cout << "Enter the angle of your turn\n";
-            std::cin >> intensity;
-            intensity = abs(intensity);
+            std::cout << "Enter the intensity of your turn\n";
+            std::cout << "Enter e for extreme and m for moderate\n";
+            std::cin >> charIntensity;
+            charIntensity = (char) tolower(charIntensity);
             std::cout << "Enter the direction of your turn(left or right)\n";
             std::cout << "Enter l for left or r for right\n";
             std::cin >> _direction;
             _direction = (char) tolower(_direction);
-            turn(intensity,_direction);
+            turnAction(charIntensity,_direction);
         } else if (op == 'd')
             showDetails();
         else if(op=='s')
@@ -160,27 +165,22 @@ void aria100::moderate_Turn_Left() {
     fuel--;
 }
 
-void aria100::turn(int intensity, char _direction) {
-    if (intensity >= 40 && intensity <= 80) {
-        if (_direction == 'l') {
-            extreme_Turn_Left();
-            directionCalculator(-1 * intensity);
-        } else if (_direction == 'r') {
-            extreme_Turn_Right();
-            directionCalculator(intensity);
-        } else std::cout << "Wrong input for direction\n";
-    } else if (intensity < 40) {
-        if (_direction == 'l') {
-            moderate_Turn_Left();
-            directionCalculator(-1 * intensity);
-        } else if (_direction == 'r') {
-            moderate_Turn_Right();
-            directionCalculator(intensity);
-        } else std::cout << "Wrong input for direction\n";
-    } else {
-        std::cout << "Wrong input\n";
-        std::cout << "Your input for angle should be between -80 to 80\n";
-    }
+void aria100::turnAction(char intensity, char _direction) {
+    if (intensity == 'e') {
+        if (_direction == 'l')
+            ariaMovement::turn(-1 * 45);
+        else if (_direction == 'r')
+            ariaMovement::turn(45);
+        else
+            std::cout << "Your input for direction should be l or r\n";
+    } else if (intensity == 'm') {
+        if (_direction == 'l')
+            ariaMovement::turn(-1 * 30);
+        else if (_direction == 'r')
+            ariaMovement::turn(30);
+        else
+            std::cout << "Your input for direction should be l or r\n";
+    } else std::cout<<"You input for intensity should be m or e\n";
 }
 
 void aria100::setting() {
@@ -246,7 +246,7 @@ void aria100::setting() {
     }
 }
 
-bool aria100::checkGasLevels(int level, char type) {
+bool aria100::checkGasLevels(int level, char type) const {
     if (type == 'e') {
         if (level > moderateGasLevel && level <= 5)
             return true;
@@ -257,7 +257,7 @@ bool aria100::checkGasLevels(int level, char type) {
     return false;
 }
 
-bool aria100::checkBrakeLevels(int level, char type) {
+bool aria100::checkBrakeLevels(int level, char type) const {
     if (type == 'e') {
         if (level > moderateBrakeLevel && level <= 5)
             return true;

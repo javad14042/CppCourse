@@ -5,10 +5,13 @@
 class ariaMovement : public movement{
 public:
     ariaMovement();
+    ariaMovement(double InSpeed,double InDirection);
+    ariaMovement(double InSpeed,double InDirection,int InFuel);
     void gasPedal(double) final;
     void brakePedal(double) final;
     void turn(double) final;
-protected:
+    void displayAmountOfFuel();
+
     double speed;
     double direction;
     int fuel;
